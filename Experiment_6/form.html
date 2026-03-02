@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Student Form</title>
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #fff;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 650px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .field {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 14px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .options {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .options label {
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    input[type="range"] {
+        width: 100%;
+    }
+
+    .range-value {
+        text-align: right;
+        font-size: 13px;
+        opacity: 0.9;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        color: #fff;
+        margin-top: 10px;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .output {
+        margin-top: 25px;
+        display: none;
+        background: rgba(0,0,0,0.35);
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    th, td {
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .copy-btn {
+        margin-top: 10px;
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+        color: #000;
+    }
+
+    .copied {
+        background: #2ecc71 !important;
+        color: #fff !important;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Student Registration Form</h2>
+
+    <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="name">
+    </div>
+
+    <div class="field">
+        <label>Age</label>
+        <input type="number" id="age">
+    </div>
+
+    <div class="field">
+        <label>Gender</label>
+        <select id="gender">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Branch</label>
+        <input type="text" id="branch">
+    </div>
+
+    <!-- RADIO BUTTON -->
+    <div class="field">
+        <label>Year of Study</label>
+        <div class="options">
+            <label><input type="radio" name="year" value="1st Year">1st</label>
+            <label><input type="radio" name="year" value="2nd Year">2nd</label>
+            <label><input type="radio" name="year" value="3rd Year">3rd</label>
+            <label><input type="radio" name="year" value="4th Year">4th</label>
+        </div>
+    </div>
+
+    <!-- MULTI SELECT -->
+    <div class="field">
+        <label>Skills (Multiple)</label>
+        <div class="options">
+            <label><input type="checkbox" value="HTML">HTML</label>
+            <label><input type="checkbox" value="CSS">CSS</label>
+            <label><input type="checkbox" value="JavaScript">JS</label>
+            <label><input type="checkbox" value="Python">Python</label>
+        </div>
+    </div>
+
+    <!-- RANGE -->
+    <div class="field">
+        <label>Satisfaction Level</label>
+        <input type="range" min="0" max="10" value="5" id="range">
+        <div class="range-value">Value: <span id="rangeVal">5</span>/10</div>
+    </div>
+
+    <div class="field">
+        <label>Message</label>
+        <textarea id="message" rows="3"></textarea>
+    </div>
+
+    <button class="btn" onclick="submitForm()">Submit</button>
+
+    <!-- OUTPUT TABLE -->
+    <div class="output" id="output">
+        <table id="dataTable"></table>
+        <button class="btn copy-btn" id="copyBtn" onclick="copyTable()">Copy Table</button>
+    </div>
+</div>
+
+<script>
+    const range = document.getElementById("range");
+    const rangeVal = document.getElementById("rangeVal");
+
+    range.oninput = () => rangeVal.textContent = range.value;
+
+    function submitForm() {
+        const year = document.querySelector('input[name="year"]:checked')?.value || "";
+        const skills = [...document.querySelectorAll('input[type="checkbox"]:checked')]
+                        .map(cb => cb.value).join(", ");
+
+        const data = {
+            Name: name.value,
+            Age: age.value,
+            Gender: gender.value,
+            Branch: branch.value,
+            Year: year,
+            Skills: skills,
+            Satisfaction: range.value + "/10",
+            Message: message.value
+        };
+
+        let tableHTML = "<tr><th>Field</th><th>Value</th></tr>";
+        for (let key in data) {
+            tableHTML += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+        }
+
+        dataTable.innerHTML = tableHTML;
+        output.style.display = "block";
+    }
+
+    function copyTable() {
+        let text = "";
+        document.querySelectorAll("#dataTable tr").forEach(row => {
+            const cells = row.querySelectorAll("th, td");
+            text += [...cells].map(c => c.innerText).join(" : ") + "\n";
+        });
+
+        navigator.clipboard.writeText(text);
+
+        copyBtn.textContent = "Copied ✓";
+        copyBtn.classList.add("copied");
+
+        setTimeout(() => {
+            copyBtn.textContent = "Copy Table";
+            copyBtn.classList.remove("copied");
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
