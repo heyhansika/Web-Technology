@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Student & Shopping Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Student and Product Management System</h1>
+
+<!-- STUDENT SECTION -->
+
+<h2>Student Operations</h2>
+
+<div class="controls">
+
+<select id="studentOption">
+<option value="">Select Operation</option>
+<option value="all">Show All Students</option>
+<option value="topper">Show Topper</option>
+<option value="above90">Marks Greater Than 90</option>
+<option value="cse">Only CSE Students</option>
+</select>
+
+<input type="text" id="searchName" placeholder="Search Student Name">
+
+<button onclick="studentOperation()">Submit</button>
+
+</div>
+
+
+<!-- PRODUCT SECTION -->
+
+<h2>Shopping / Product Operations</h2>
+
+<div class="controls">
+
+<select id="productOption">
+<option value="">Select Category</option>
+<option value="all">All Products</option>
+<option value="electronics">Electronics</option>
+<option value="furniture">Furniture</option>
+<option value="groceries">Groceries</option>
+<option value="total">Total Price</option>
+</select>
+
+<button onclick="productOperation()">Submit</button>
+
+</div>
+
+
+<div id="studentOutput"></div>
+<br>
+<div id="productOutput"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
