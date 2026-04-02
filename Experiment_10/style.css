@@ -1,0 +1,177 @@
+/* style.css - High-End Modern Dashboard Design */
+:root {
+    --primary: #6366f1; /* Indigo Glow */
+    --accent: #818cf8;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --bg-dark: #020617; /* Deep Navy/Black */
+    --card-bg: rgba(30, 41, 59, 0.5); /* Semi-transparent */
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    background: radial-gradient(circle at top left, #0f172a, var(--bg-dark));
+    color: #f8fafc;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(12px);
+    padding: 1.2rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+}
+
+h1, h2 { font-weight: 700; letter-spacing: -0.025em; }
+
+/* Product Grid Styling */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 3rem 10%;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: 0.4s;
+}
+
+.card:hover img { filter: brightness(1.1); }
+
+.card-content { padding: 1.5rem; }
+
+.btn-buy {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: 0.3s;
+}
+
+.btn-buy:hover { opacity: 0.9; box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5); }
+
+/* Cart Table Styling (The page from your screenshot) */
+.cart-container {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Gap between rows */
+}
+
+.cart-table th {
+    text-align: left;
+    padding: 1rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.cart-table tr td {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.2rem;
+}
+
+.cart-table tr td:first-child { border-radius: 12px 0 0 12px; }
+.cart-table tr td:last-child { border-radius: 0 12px 12px 0; }
+
+.cart-table tr:hover td {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.remove-btn {
+    color: var(--danger);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.remove-btn:hover { background: rgba(239, 68, 68, 0.1); }
+
+.total-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: right;
+}
+
+.grand-total {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.action-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    margin-right: 1.5rem;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.action-links a:hover { color: #fff; }
+
+.clear-link { color: var(--danger) !important; }
+
+/* Cookie Notification Toast */
+.cookie-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary);
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
